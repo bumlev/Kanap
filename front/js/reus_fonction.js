@@ -14,9 +14,4 @@ export  function link_attributes(){
     link.setAttribute("rel" , "shortcut icon");
     link.setAttribute("href" , "#");
 }
-
-/*export  function module_attributes(){
-    const script = document.getElementsByTagName('script');
-    script[0].setAttribute("type" , "module");
-}*/
  

@@ -274,7 +274,7 @@ async function OrderNumber(){
   }
 }
 
-
+//// -------------------- Functionnalities for cart.html only--------------------------------//////
 if(window.location.href == "http://127.0.0.1:5501/front/html/cart.html"){
     product_reports();
     delete_product();
@@ -287,7 +287,9 @@ if(window.location.href == "http://127.0.0.1:5501/front/html/cart.html"){
           post_data(e);
       });
     }
-}  
+}
+
+//// -------------------- Functionnalities for confirmation.html only--------------------------------//////
 OrderNumber();
 
 
