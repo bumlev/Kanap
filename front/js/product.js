@@ -20,7 +20,7 @@ import ('./reus_fonction.js')
 // Get Image of Product
 function image_product(product){
     let item__img = document.getElementsByClassName('item__img');
-    item__img[0].innerHTML= "<img src='" + product.imageUrl + "' alt='"+product.altTxt+"'/>";
+    item__img[0].innerHTML= '<img src='+''+ product.imageUrl + ' alt='+''+JSON.stringify(product.altTxt)+'/>'; 
 }
 
 // Get name of product
@@ -48,7 +48,6 @@ function colors_product(product){
 }
 
 /// Add to Cart
-let storage = Array();
 function add_to_cart(storage){
 
   let Id_product = getIdUrl();
@@ -67,7 +66,7 @@ function add_to_cart(storage){
 
   if(getStorages === null){
       localStorage.setItem("storage" , JSON.stringify(storage));
-      window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+      window.location.href = "http://127.0.0.1:5501/front/html/cart.html";
   }else{
       getStorages = JSON.parse(getStorages);
       let i = 0;
@@ -76,14 +75,14 @@ function add_to_cart(storage){
             i++;
             getStorage.quantity += Number(quantity);
             localStorage.setItem("storage" , JSON.stringify(getStorages));
-            window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+            window.location.href = "http://127.0.0.1:5501/front/html/cart.html";
             break;
           } 
       }
       if(i === 0){
           getStorages.push({id: Id_product , name:name , color:color , description:description , price:Number(price) , quantity: Number(quantity) , img:img});
           localStorage.setItem("storage" , JSON.stringify(getStorages));
-          window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+          window.location.href = "http://127.0.0.1:5501/front/html/cart.html";
       }
 
   }
@@ -111,6 +110,7 @@ fetch("http://localhost:3000/api/products/" + recup_id)
     // Ajout du panier 
     let addToCart = document.getElementById("addToCart");
     addToCart.addEventListener('click' , function(){ 
+      let storage = Array();
       add_to_cart(storage);
     });
     

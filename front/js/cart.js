@@ -268,14 +268,14 @@ function getIdOrder(){
 /// To get the number of order
 async function OrderNumber(){
   let IdOrder = await getIdOrder();
-  if(window.location.href == "http://127.0.0.1:5500/front/html/confirmation.html?order=" + IdOrder){
+  if(window.location.href == "http://127.0.0.1:5501/front/html/confirmation.html?order=" + IdOrder){
     let order_id = document.getElementById("orderId");
     order_id.textContent = IdOrder;
   }
 }
 
 
-if(window.location.href == "http://127.0.0.1:5500/front/html/cart.html"){
+if(window.location.href == "http://127.0.0.1:5501/front/html/cart.html"){
     product_reports();
     delete_product();
     update_quantity_product();
@@ -287,8 +287,7 @@ if(window.location.href == "http://127.0.0.1:5500/front/html/cart.html"){
           post_data(e);
       });
     }
-}
-   
+}  
 OrderNumber();
 
 
