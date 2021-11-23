@@ -1,4 +1,4 @@
-// Import reusables fonctions
+/* Import reusables fonctions
 
 import ('./reus_fonction.js')
 .then(function(module){
@@ -10,7 +10,7 @@ import ('./reus_fonction.js')
 
     // insert attributes 
     //module.module_attributes();
-})
+})*/
 
 
 // Display products

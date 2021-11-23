@@ -1,4 +1,4 @@
-// Import reusables fonctions
+/* Import reusables fonctions
 
 import ('./reus_fonction.js')
 .then(function(module){
@@ -7,7 +7,7 @@ import ('./reus_fonction.js')
 
   //Step1: Insert pages in browser
   //module.insert_pages();
-})
+})*/
 
 function centimes_euro(){
   const euro = new Intl.NumberFormat('fr-FR', {
