@@ -1,14 +1,3 @@
-/* Import reusables fonctions
-
-import ('./reus_fonction.js')
-.then(function(module){
-    // Set script attributes
-    module.link_attributes();
-
-    //Step1: Insert pages in browser
-   // module.insert_pages();
-})*/
-
 /// Get Id of Url
  function getIdUrl(){
     let geturl =  window.location;
@@ -20,7 +9,10 @@ import ('./reus_fonction.js')
 // Get Image of Product
 function image_product(product){
     let item__img = document.getElementsByClassName('item__img');
-    item__img[0].innerHTML= '<img src='+''+ product.imageUrl + ' alt='+''+JSON.stringify(product.altTxt)+'/>'; 
+    let img = document.createElement('img');
+    img.setAttribute("src" , product.imageUrl);
+    img.setAttribute("alt" , product.altTxt);
+    item__img[0].appendChild(img);
 }
 
 // Get name of product
@@ -43,7 +35,10 @@ function colors_product(product){
     let colors = document.getElementById('colors');
     let color = product.colors;
     for(i=0 ; i < color.length ; i++){
-      colors.innerHTML += " <option value="+color[i]+">"+color[i]+"</option>";
+      let option = document.createElement('option');
+      option.setAttribute('value' , color[i]);
+      option.textContent = color[i];
+      colors.appendChild(option);
     }
 }
 
@@ -53,40 +48,43 @@ function add_to_cart(storage){
   let Id_product = getIdUrl();
   let color = document.getElementById('colors').value;
   let quantity = document.getElementById("quantity").value;
-
+  
   let name = document.getElementById("title").textContent;
   let description = document.getElementById("description").textContent;
   let price = document.getElementById("price").textContent;
   let item__img = document.getElementsByClassName("item__img");
-  let child_item = item__img[0].firstChild;
+  let child_item = item__img[0].firstElementChild;
   let img = child_item.getAttribute("src");
   let altTxt = child_item.getAttribute("alt");
 
-  storage.push({id: Id_product , name:name , color:color , description:description , price:Number(price) , quantity: Number(quantity) , img:img , altTxt:altTxt});
-  getStorages = localStorage.getItem("storage");
+  if(color !='' && (quantity >= 1 && quantity <= 100)){
+    storage.push({id: Id_product , name:name , color:color , description:description , price:Number(price) , quantity: Number(quantity) , img:img , altTxt:altTxt});
+    getStorages = localStorage.getItem("storage");
 
-  if(getStorages === null){
-      localStorage.setItem("storage" , JSON.stringify(storage));
-      window.location.href = "cart.html";
-  }else{
-      getStorages = JSON.parse(getStorages);
-      let i = 0;
-      for(getStorage of getStorages){
-          if(getStorage.id === Id_product && getStorage.color === color){ 
-            i++;
-            getStorage.quantity += Number(quantity);
+    if(getStorages === null){
+        localStorage.setItem("storage" , JSON.stringify(storage));
+        window.location.href = "cart.html";
+    }else{
+        getStorages = JSON.parse(getStorages);
+        let i = 0;
+        for(getStorage of getStorages){
+            if(getStorage.id === Id_product && getStorage.color === color){ 
+              i++;
+              getStorage.quantity += Number(quantity);
+              localStorage.setItem("storage" , JSON.stringify(getStorages));
+              window.location.href = "cart.html";
+              break;
+            } 
+        }
+        if(i === 0){
+            getStorages.push({id: Id_product , name:name , color:color , description:description , price:Number(price) , quantity: Number(quantity) , img:img , altTxt:altTxt});
             localStorage.setItem("storage" , JSON.stringify(getStorages));
             window.location.href = "cart.html";
-            break;
-          } 
-      }
-      if(i === 0){
-          getStorages.push({id: Id_product , name:name , color:color , description:description , price:Number(price) , quantity: Number(quantity) , img:img , altTxt:altTxt});
-          localStorage.setItem("storage" , JSON.stringify(getStorages));
-          window.location.href = "cart.html";
-      }
+        }
+    }
 
   }
+    
 }
 
 /// Get one product by Recovering Id_product
@@ -105,7 +103,7 @@ fetch("http://localhost:3000/api/products/" + recup_id)
       colors_product(product);
     })
   
-    // Ajout du panier 
+    // Add to Cart
     let addToCart = document.getElementById("addToCart");
     addToCart.addEventListener('click' , function(){ 
       let storage = Array();

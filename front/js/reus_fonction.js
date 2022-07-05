@@ -7,11 +7,11 @@ export  function insert_pages (){
 }*/
 
 // ------Set attributes "" in link
-export  function link_attributes(){
+/*export  function link_attributes(){
     const link =document.createElement("link");
     const head = document.getElementsByTagName("head");
     head[0].appendChild(link);
     link.setAttribute("rel" , "shortcut icon");
     link.setAttribute("href" , "#");
-}
+}*/
  

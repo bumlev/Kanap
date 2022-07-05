@@ -1,14 +1,5 @@
-/* Import reusables fonctions
 
-import ('./reus_fonction.js')
-.then(function(module){
-  // Set script attributes
-  module.link_attributes();
-
-  //Step1: Insert pages in browser
-  //module.insert_pages();
-})*/
-
+// Convert in euro
 function centimes_euro(){
   const euro = new Intl.NumberFormat('fr-FR', {
     minimumFractionDigits: 2
@@ -124,7 +115,7 @@ function validate_data_order(){
 
       let order = {contact:"" , products:""};
       let contact = {firstName:"" , lastName:"" , address:"" , city:"" , email:""};
-      let regex1 = /^[a-zA-Z]+$/;
+      let regex1 = /^[a-z A-Z]+$/;
       let regex2 = /^[a-zA-Z0-9&-_\/№]+$/g;
       let regex3 = /^\S+@\S+\.\S+$/;
       let firstName = document.getElementById("firstName");
